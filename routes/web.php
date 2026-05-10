@@ -103,4 +103,3 @@ Route::middleware('auth')->group(function () {
 
 }); // End of Security Headers Group
 
-require __DIR__.'/auth.php';
