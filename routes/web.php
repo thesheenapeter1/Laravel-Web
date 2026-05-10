@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\HomeController;
 
 // Global Security & Experience Middlewares
 // 'security.headers': Applied to all web routes to add premium safety headers.
@@ -16,18 +17,12 @@ Route::middleware(['security.headers'])->group(function () {
 
 // Public Routes
 
-Route::get('/', function () {
-    // Need to fetch featured products for Home Page
-    $featuredProducts = \App\Models\Product::take(6)->get();
-    return view('welcome', compact('featuredProducts'));
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [ProductController::class, 'show'])->name('shop.show');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::view('/about', 'about')->name('about');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 

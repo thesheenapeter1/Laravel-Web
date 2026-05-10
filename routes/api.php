@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
 
 /**
  * What is this: Laravel Sanctum.
@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
  * PROBLEM SOLVED: It prevents unauthorized access to sensitive user data, ensuring 
  *      the API remains secure and integrated with the main application's auth.
  */
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::get('/user', [UserController::class, 'show'])->middleware('auth:sanctum');
 
 // Product APIs (Public or Protected)
 Route::get('/products', [\App\Http\Controllers\Api\ProductController::class, 'index']);
